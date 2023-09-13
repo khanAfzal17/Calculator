@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI&EMI Calculator</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="shortcut icon" href="./Calculator-ico.ico" type="image/x-icon">
+    <style>
+        *{
+            font-family:Arial ;
+        }
+        .bg-img{
+            background-image: url(./bg-img.jpg);
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+        }
+      input[type="range"]{
+            width: 100%;
+        }
+        .btn-success:hover{
+            transform: scale(1.058);
+            transition: 0.3s;
+            font-weight: bold;
+            border: 2px solid rgb(115, 200, 206);
+        }
+        .btn-warning:hover{
+            transform: scale(1.058);
+            transition: 0.3s;
+            font-weight: bold;
+            border: 2px solid rgb(115, 200, 206);
+        }
+        body{
+            background-image: url(./EMIBMI.jpg);
+        }
+        .loan-image{
+            background-image: url(./bg-img.jpg);
+        }
+    
+    </style>
+    <script type="text/javascript">
+        function CalculateClick1(){
+              var H =document.getElementById("height").value/100*2;
+              var W = document.getElementById("weight").value;
+              var BMI = W/H;
+              document.getElementById("result1").innerHTML = "Your Body Mass Index is: " +Math.round(BMI);
+         }
+        function AmountChange(){
+          document.getElementById("txtAmount").value = document.getElementById("amountRange").value;
+        }
+        function YearChange(){
+           document.getElementById("txtYears").value = document.getElementById("yearRange").value;
+        }
+        function RateChange(){
+           document.getElementById("txtRate").value = document.getElementById("rateRange").value;
+        }
+        function CalculateClick2(){
+             var P = parseInt(document.getElementById("txtAmount").value);
+             var N = parseInt(document.getElementById("txtYears").value) * 12;
+             var R = parseFloat(document.getElementById("txtRate").value)/12/100;
+             var EMI = P * R * (Math.pow(1+R,N)) / (Math.pow(1+R,N))-1;
+             document.getElementById("result2").innerHTML = "Your monthly Installment amount is Rs: " + Math.round(EMI);
+        }
+   </script>
+</head>
+<body>
+<div class="container w-50 p-4">
+    <div class="bg-img border" >
+        <div>
+            <h1 class="bg-primary text-white text-center p-3 w-100"><span class="bi bi-heart-pulse"></span> Calculate Your BMI</h1>
+            <div class="d-flex justify-content-evenly">
+                <div>
+                    <input type="radio" name="click"><font class="text-black fw-bold">Metric</font>
+                </div>
+                <div class="ms-5">
+                    <input type="radio" name="click"><font class="text-black fw-bold">Imperial</font>
+                </div>
+            </div>
+         <div class="d-flex">
+            <div class="p-4">
+                <dt><label for="height" class="text-all">Height:</label></dt>
+            <dd><input id="height" type="number" name="height" placeholder="Height (cm)" class="form-control" step="0.1"></dd>
+            </div>
+            <span class="p-5 form-control-lg">+</span>
+            <div class="p-4">
+                <dt><label for="weight" class="text-black fw-bold">Weight:</label></dt>
+            <dd><input id="weight" type="number" step=".01" name="weight" placeholder="Weight (kg)" class="form-control"></dd>
+            </div>
+            <div>
+                <button onclick="CalculateClick1()"  class="text-black fw-bold btn btn-warning m-5">Submit</button>
+            </div>
+         </div>
+         <div class="mt-4">
+            <p id="result1" class="text-center h4 fw-bold text-dark"></p>
+        </div>
+    </div>
+ </div>
+</div>
+<!-- Loan EMI Calculator -->
+<div class="d-flex justify-content-center">
+    <div class="bg-white text-dark w-50" >
+        <h1 class="text-bg-warning text-center p-1"><span class="bi bi-cash-coin"></span> Personal Loan Calculator</h1>
+        <div class="p-2 loan-image">
+            <div class=" row mt-2">
+                <div class="col text-center fw-bold">
+                    Amount <input size="7" type="text" id="txtAmount"> need
+                </div>
+                <div class="col text-center fw-bold">
+                    for <input type="text" size="4" id="txtYears"> years
+                </div>
+                <div class="col text-center fw-bold">
+                    Interest rate <input type="text" size="4" id="txtRate"> %
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col text-center">
+                    <input type="range" onchange="AmountChange()" id="amountRange" min="100000" max="1000000" value="50000" step="1">
+                </div>
+                <div class="col text-center">
+                    <input type="range" onchange="YearChange()" id="yearRange" min="1" max="7" value="1" step="1">
+                </div>
+                <div class="col text-center">
+                    <input type="range" onchange="RateChange()" id="rateRange" min="8.45" max="12.00" value="8.45" step="0.01">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col d-flex justify-content-between">
+                    <span>Rs- 1,00,000</span>
+                    <span>Rs- 10,00,000</span>
+                </div>
+                <div class="col d-flex justify-content-between">
+                    <span>1</span>
+                    <span>7</span>
+                </div>
+                <div class="col d-flex justify-content-between">
+                    <span>8.45%</span>
+                    <span>12.00%</span>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col text-end">
+                    <button onclick="CalculateClick2()" class="btn btn-success ">Calculate</button>
+                </div>
+            </div>
+            <div class="mt-2">
+                <p id="result2" class="text-center fw-bold h5 text-dark"></p>
+            </div>
+        </div>
+    </div>  
+</div>  
+</body>
+</html>
